@@ -34,17 +34,18 @@
   justify-content: start;
   align-items: center;
   gap: 4px;
+  margin-bottom: 50px;
 
 }
 
 .main{
-  margin: 57px;
+  margin: 57px 150px;
 }
 
 .jobs-list{
   display: grid;
   grid-template-columns: repeat(3, 1fr); 
-  gap: 70px; 
+  gap: 160px; 
   justify-items: center; 
   align-items: center;
 }

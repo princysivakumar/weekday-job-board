@@ -48,6 +48,7 @@ import React, { useState, useEffect } from 'react';
 import FilterPanel from './components/search-filter';
 import { TextField } from '@mui/material';
 import JobCard from './components/cards';
+import './App.css';
 
 
 
@@ -55,7 +56,7 @@ import JobCard from './components/cards';
 // interface Job {
 //   jdUid: string;
 //   jdLink: string;
-//   jobDetailsFromCompany: string;
+//   jobDetailsFromCompany: string;s
 //   maxJdSalary: number;
 //   minJdSalary: number | null; // minJdSalary can be null
 //   salaryCurrencyCode: string;
@@ -137,13 +138,17 @@ const App= () => {
 
   return (
     <div className="main">
+      <div className='filters'>
+
       <FilterPanel />
 
       {/* Filter components - Add Material UI inputs for each filter criteria */}
-      <div className="filters">
-        <TextField label="Experience" name="minExperience" value={filters.minExperience} onChange={handleFilterChange} />
-        {/* Add other filter components here */}
+     <div className="experiance-filter">
+      <TextField label="Experience" name="minExperience" value={filters.minExperience} onChange={handleFilterChange} />
+      {/* Add other filter components here */}
       </div>
+      </div>
+    
 
       <div className="jobs-list">
         {jobs.map((job) => (

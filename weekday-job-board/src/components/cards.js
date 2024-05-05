@@ -1,4 +1,8 @@
+import { Card } from '@mui/material';
 import React from 'react';
+import './cards.css'
+
+
 // import Card from '@mui/material/Card';
 // import CardContent from '@mui/material/CardContent';
 // import Typography from '@mui/material/Typography';
@@ -22,7 +26,7 @@ const JobCard = ({ job }) => {
     logoUrl,
   } = job;
   return (
-    <div className="job-card">
+    <Card className="job-card">
       <div className="job-card-header">
         {logoUrl && <img
               src={logoUrl} 
@@ -54,7 +58,7 @@ const JobCard = ({ job }) => {
         {/* This section might need adjustment based on actual button presence*/}
         {/* {isEasyApplyButtonVisible && <button>Easy Apply</button>} */}
       </div>
-    </div>
+    </Card>
   );
 };
 

@@ -1,10 +1,18 @@
 import { Card } from '@mui/material';
-import React from 'react';
+import React, { useState }  from 'react';
 import './cards.css';
 import Button from '@mui/material/Button';
 import BoltIcon from '@mui/icons-material/Bolt';
 
 const JobCard = ({ job }) => {
+
+  const [showAll, setShowAll] = useState(false);
+
+
+  const handleToggle = () => {
+    setShowAll(!showAll);
+  };
+
     const {
     jobDetailsFromCompany,
     maxJdSalary,
@@ -42,6 +50,14 @@ const JobCard = ({ job }) => {
       <div className="job-card-description">
         <div className='about-company'>About Company:</div>
         <p>{jobDetailsFromCompany}</p> 
+        <p>{showAll ? jobDetailsFromCompany : jobDetailsFromCompany.slice(0, 150)}
+        {!showAll && (
+        
+        <Button variant="text" onClick={handleToggle}>Show More...</Button>
+      )}
+        </p>
+      
+
       </div>
       <div className='min-exp'>  Minimum Experience:</div>
         <div className='exp-value'>

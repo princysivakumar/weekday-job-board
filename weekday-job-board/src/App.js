@@ -48,85 +48,35 @@ import React, { useState, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import JobCard from './components/cards';
 import './App.css';
-import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-];
 
 const roles = [
   {
-    value: 'Backend',
+    value: 'backend',
     label: 'Backend'
   },
   {
-    value: 'Frontend',
+    value: 'frontend',
     label: 'Frontend'
   },
   {
-    value: 'FullStack',
+    value: 'fullstack',
     label: 'FullStack'
   },
   {
-    value: 'IOS',
+    value: 'ios',
     label: 'IOS'
   },
   {
-    value: 'Flutter',
-    label: 'Flutter'
+    value: 'android',
+    label: 'Android'
   },
   {
-    value: 'Dev-Ops',
+    value: 'dev-ops',
     label: 'Dev-Ops'
   },
   
-]
-
-const no_of_employes = [
-  {
-    value: '1-10',
-    label: '1-10'
-  },
-  {
-    value: '11-20',
-    label: '11-20'
-  },
-  {
-    value: '21-50',
-    label: '21-50'
-  },
-  {
-    value: '51-100',
-    label: '51-100'
-  },
-  {
-    value: '101-200',
-    label: '101-200'
-  },
-  {
-    value: '201-500',
-    label: '201-500'
-  },
-  {
-    value: '500+',
-    label: '500+'
-  },
 ]
 
 const experience =[
@@ -223,24 +173,6 @@ const min_salary = [
 ]
 
 
-
-
-// interface Job {
-//   jdUid: string;
-//   jdLink: string;
-//   jobDetailsFromCompany: string;s
-//   maxJdSalary: number;
-//   minJdSalary: number | null; // minJdSalary can be null
-//   salaryCurrencyCode: string;
-//   location: string;
-//   minExp: number;
-//   maxExp: number | null; // maxExp can be null
-//   jobRole: string;
-//   companyName: string;
-//   logoUrl: string;
-// }
-
-
 const App= () => {
   const [jobs, setJobs] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -249,7 +181,7 @@ const App= () => {
   const [filters, setFilters] = useState({
     minExperience: '',
     companyName: '',
-    location: 'remote',
+    location: '',
     employmentType: '', // Remote/On-site
     noOfEmployees: '',
     role: '',
@@ -276,6 +208,7 @@ const App= () => {
     setOffset(offset + data.jdList.length); 
     setIsLoading(false); 
     setFilteredJobs([...jobs, ...data.jdList])
+    console.log('input to setfilter',[...jobs, ...data.jdList]);
   };
 
   // Initial data fetching
@@ -297,19 +230,25 @@ const App= () => {
   };
 
   const filterJobs = (filterName, filterValue) => {
+    console.log('jobs',jobs);
+    console.log('filterName', filterName);
+    console.log('filterValue', filterValue);
     const filtered = jobs.filter(job => {
       if (filterName === 'minExperience') {
-        return job.experience >= parseInt(filterValue);
+        return job.minExp >= parseInt(filterValue);
       }
       if (filterName === 'minBasePay') {
-        return job.basePay >= parseInt(filterValue);
+        return job.minJdSalary >= parseInt(filterValue);
       }
       if (filterName === 'location') {
         return job.location === filterValue;
       }
      
-      if(filterName === 'noOfEmployees'){
-        return job.noOfEmployees === filterValue;
+      if(filterName === 'companyName'){
+        return job.companyName === filterValue;
+      }
+      if(filterName === 'role'){
+        return job.jobRole === filterValue;
       }
       return true; // If no match found, include the job
     });
@@ -335,23 +274,25 @@ const App= () => {
     <div className="main">
       <div className='filters'>
 
-<div >
+<div  >
 <TextField
           
           select
-          label='Number of Employees'
+          label='Roles'
           className='filter-width'
-          name='noOfEmployees'
-          value={filters.noOfEmployees}
+          name='role'
+          value={filters.role}
           onChange={handleFilterChange}
         >
-          {no_of_employes.map((option) => (
+          {roles.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>
           ))}
         </TextField>
 </div>
+
+{/* no of employes data is not coming in the api */}
 
 <div >
 <TextField
@@ -408,6 +349,17 @@ const App= () => {
               {option.label}
             </MenuItem>
           ))}
+        </TextField>
+</div>
+
+<div >
+<TextField
+          label='Company Name'
+          className='filter-width'
+          name='companyName'
+          value={filters.companyName}
+          onChange={handleFilterChange}
+        >
         </TextField>
 </div>
 

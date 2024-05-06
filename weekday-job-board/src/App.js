@@ -208,7 +208,6 @@ const App= () => {
     setOffset(offset + data.jdList.length); 
     setIsLoading(false); 
     setFilteredJobs([...jobs, ...data.jdList])
-    console.log('input to setfilter',[...jobs, ...data.jdList]);
   };
 
   // Initial data fetching
@@ -230,9 +229,6 @@ const App= () => {
   };
 
   const filterJobs = (filterName, filterValue) => {
-    console.log('jobs',jobs);
-    console.log('filterName', filterName);
-    console.log('filterValue', filterValue);
     const filtered = jobs.filter(job => {
       if (filterName === 'minExperience') {
         return job.minExp >= parseInt(filterValue);

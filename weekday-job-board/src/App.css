@@ -2,6 +2,8 @@
   text-align: center;
 }
 
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,6 +37,7 @@
   align-items: center;
   gap: 4px;
   margin-bottom: 50px;
+  flex-wrap: wrap;
 
 }
 
@@ -65,7 +68,40 @@
 
 
 
+@media (max-width: 767px) {
+  .filter-width{
+    width: 106px;
+  }
 
+  .jobs-list{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 10px; 
+    justify-items: center; 
+    align-items: center;
+  }
 
+  .main{
+    margin: 5px 15px;
+  }
+}
 
+@media (min-width: 768px) and (max-width: 991px) {
+  .filter-width{
+    width: 106px;
+  }
+
+  .jobs-list{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px; 
+    justify-items: center; 
+    align-items: center;
+  }
+  .main{
+    margin: 30px 50px;
+  }
+
+  
+}
 
